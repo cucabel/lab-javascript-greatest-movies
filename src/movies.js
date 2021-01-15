@@ -26,7 +26,7 @@ function ratesAverage(array) {
       return total;
     }
   }, 0);
-  return Number((totalAverage / averageScore.length).toFixed(2));
+  return Number((totalAverage / averageScore.length).toFixed(2)); // toFixed(2) returns a String -> Number to convert it
 }
 console.log(ratesAverage(movies));
 
@@ -46,27 +46,15 @@ function dramaMoviesRate(array) {
 console.log(dramaMoviesRate(movies));
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-/*const orderByYear = movies.map(m => m).sort((a.year, b.year) => a.year - b.year);*/
-
-function orderByYear(arr) {
-  const otherMovies = arr.map((element) => element);
-  otherMovies.sort(function (a, b) {
-    if (a.year < b.year) {
-      return -1;
-    }
-    if (a.year > b.year) {
-      return 1;
-    }
-    if (a.year === b.year) {
-      if (a.title < b.title) {
-        return -1;
-      } else {
-        return 0;
-      }
-    }
-  });
-  return otherMovies;
+const orderByYear = arr => arr.slice().sort((a, b) => a.year === b.year ? sortByTitle(a, b) : a.year - b.year);
+const sortByTitle = (a, b) => {
+  if (a.title > b.title) 
+    return 1;
+  if (a.title < b.title) 
+    return -1;
+  else return 0;
 }
+orderByYear(movies);
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically(arr) {
